@@ -7,7 +7,7 @@ import com.hcl.rpc.framework.RpcProxy;
 /**
  * @author: Hucl
  * @date: 2019/6/22 14:54
- * @description:
+ * @description: 客户端
  */
 public class Main {
 

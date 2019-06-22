@@ -6,7 +6,7 @@ import java.lang.reflect.Proxy;
 /**
  * @author: Hucl
  * @date: 2019/6/22 14:59
- * @description:
+ * @description: 代理
  */
 public class RpcProxy<T> {
 

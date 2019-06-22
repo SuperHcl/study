@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
  * @description:
  */
 public class RpcServer {
-    ExecutorService executorService = Executors.newFixedThreadPool(20);
+    private ExecutorService executorService = Executors.newFixedThreadPool(20);
 
     public void start(int port) {
         try {
