@@ -27,6 +27,8 @@ public class Test1 {
 
     @Test
     public void test1() {
+        // selectOne(String statementId, Object o)
+        // statementId = mapper文件的 namespace + 语句的id
         User user = sqlSession.selectOne("com.hcl.mybatis.dao.UserDao.findUserById", 2);
         System.out.println(user.toString());
     }
