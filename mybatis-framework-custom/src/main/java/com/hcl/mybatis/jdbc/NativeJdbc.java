@@ -23,10 +23,10 @@ public class NativeJdbc {
             // 获取数据库连接
             connection = getConnection();
             // 定义sql语句
-            String sql = "select * from user where id = ?";
+            String sql = "select * from user where name = 'Jack'";
             // 获取预处理对象
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, 1);
+//            preparedStatement.setInt(1, 1);
             // 执行查询，获取结果集
             rs = preparedStatement.executeQuery();
             // 遍历结果集

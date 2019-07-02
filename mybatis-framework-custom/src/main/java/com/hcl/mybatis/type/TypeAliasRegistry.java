@@ -46,7 +46,32 @@ public class TypeAliasRegistry {
     }
 
     /**
+     * 根据string 类的全路径返回对应的Class对象
+     * @param alias "com.hcl.mybatis.test.Test1"
+     * @return Test1.class
+     */
+    @SuppressWarnings("all")
+    public <T> Class<T> resolveAlias(String alias) {
+        try {
+            if (alias == null) {
+                return null;
+            }
+            String key = alias.toLowerCase(Locale.ENGLISH);
+            Class<T> value;
+            if (TYPE_ALIASES.containsKey(key)) {
+                value = (Class<T>) TYPE_ALIASES.get(key);
+            } else {
+                value = (Class<T>) this.getClass().forName(alias);
+            }
+            return value;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Could not resolve type alias '" + alias + "'.  Cause: " + e, e);
+        }
+    }
+
+    /**
      * 解析单个引用类型 （对象）
+     *
      * @param alias 别名
      * @param value Class
      */

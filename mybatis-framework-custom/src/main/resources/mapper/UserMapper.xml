@@ -4,4 +4,12 @@
 		resultType="com.hcl.mybatis.pojo.User" statementType="prepared">
 		SELECT * FROM user WHERE id = #{id} 
 	</select>
+
+	<select id="findUserByName" parameterType="string" resultType="com.hcl.mybatis.pojo.User" statementType="prepared">
+		Select * from user where name = #{name}
+	</select>
+
+	<select id="findUserByObj" parameterType="com.hcl.mybatis.pojo.User" resultType="com.hcl.mybatis.pojo.User" statementType="prepared">
+		select * from user where age = #{age}
+	</select>
 </mapper>

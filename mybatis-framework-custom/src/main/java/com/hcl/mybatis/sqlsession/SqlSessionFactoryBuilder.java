@@ -14,8 +14,11 @@ import java.io.Reader;
  */
 public class SqlSessionFactoryBuilder {
     // 封装全局配置文件信息和所有映射文件的信息
-    // TODO 目前configuration暂时未初始化，会造成npe
-    private Configuration configuration = new Configuration();
+    private Configuration configuration;
+
+    public SqlSessionFactoryBuilder() {
+        configuration = new Configuration();
+    }
 
     public SqlSessionFactory build(InputStream inputStream) {
         // 解析全局配置文件，封装为Configuration对象

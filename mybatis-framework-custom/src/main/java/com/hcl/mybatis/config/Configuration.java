@@ -1,7 +1,7 @@
 package com.hcl.mybatis.config;
 
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.type.TypeAliasRegistry;
+
+import com.hcl.mybatis.type.TypeAliasRegistry;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -15,8 +15,8 @@ import java.util.Map;
 public class Configuration {
     private DataSource dataSource;
 
-    protected Map<String, MappedStatement> mappedStatementMap = new StrictMap<MappedStatement>("Mapped Statements collection");
-    protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
+    protected Map<String, MappedStatement> mappedStatementMap = new StrictMap<>("Mapped Statements collection");
+    private final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
 
     public Configuration(){}
 
@@ -29,6 +29,21 @@ public class Configuration {
         this.dataSource = dataSource;
     }
 
+    public TypeAliasRegistry getTypeAliasRegistry() {
+        return typeAliasRegistry;
+    }
+
+    public Map<String, MappedStatement> getMappedStatementMap() {
+        return mappedStatementMap;
+    }
+
+    public void setMappedStatementMap(Map<String, MappedStatement> mappedStatementMap) {
+        this.mappedStatementMap = mappedStatementMap;
+    }
+
+    public void addMappedStatement(String statementId, MappedStatement mappedStatement) {
+        this.mappedStatementMap.put(statementId, mappedStatement);
+    }
 
     protected static class StrictMap<V> extends HashMap<String, V> {
         private final String name;
