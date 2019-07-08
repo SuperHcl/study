@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="student" class="com.hcl.spring.po.Student" init-method="initMethod" destory-method="destroyMethod">
+        <!--String类型-->
+        <property name="name" value="Jackson"></property>
+        <!--引用类型-->
+        <property name="course" ref="course"></property>
+    </bean>
+
+    <bean id="course" class="com.hcl.spring.po.Course">
+        <!--String类型-->
+        <property name="name" value="math"></property>
+        <!--Integer类型-->
+        <property name="age" value="18"></property>
+    </bean>
+</beans>
