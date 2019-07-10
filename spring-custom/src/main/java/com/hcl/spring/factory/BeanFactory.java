@@ -6,5 +6,17 @@ package com.hcl.spring.factory;
  * @description:
  */
 public interface BeanFactory {
-    <T> T getBean(String name);
+    /**
+     * 根据bean的name获取对象实例
+     * @param name
+     * @return
+     */
+    Object getBean(String name);
+
+    /**
+     * 根据bean的类型获取对相关实例
+     * @param clazz
+     * @return
+     */
+    Object getBean(Class<?> clazz);
 }

@@ -26,5 +26,12 @@ public class Student {
 	public void destroyMethod() {
 		System.out.println("销毁方法");
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"name='" + name + '\'' +
+				", course=" + course +
+				'}';
+	}
 }
