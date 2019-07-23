@@ -19,5 +19,6 @@
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>com.hcl.springmvc.servlet.DispatcherServlet</servlet-class>
+
     </servlet>
 </web-app>
