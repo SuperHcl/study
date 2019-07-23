@@ -49,7 +49,9 @@ public class DefaultListableBeanFactory extends AbstractBeanFactory {
         if (instance != null) {
             return instance;
         }
-        BeanDefinition beanDefinition = beanDefinitions.get(beanName);
+        // 只处理单例
+        // 先获取BeanDefinition
+        BeanDefinition beanDefinition = this.getBeanDefinitions().get(beanName);
         // 通过无参构造方法来构建instance的实例
         instance = createBeanInstance(beanDefinition.getBeanClassName(), null);
         // 给实例好的instance设置属性
@@ -61,6 +63,49 @@ public class DefaultListableBeanFactory extends AbstractBeanFactory {
         // 注册进singletonObjects
         registerSingletonObjects(beanName, instance);
         return instance;
+    }
+
+    @Override
+    public List<String> getBeanNamesByType(Class<?> type) {
+        List<String> result = new ArrayList<>();
+        beanDefinitions.keySet().forEach(beanName -> {
+            BeanDefinition beanDefinition = beanDefinitions.get(beanName);
+            try {
+                Class<?> clazz = Class.forName(beanDefinition.getBeanClassName());
+                // 判断type是否是clazz的父类
+                if (type.isAssignableFrom(clazz)) {
+                    result.add(beanName);
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> List<T> getBeansByType(Class<T> clazz) {
+        List<T> list = new ArrayList<>();
+        beanDefinitions.values().forEach(beanDefinition -> {
+            try {
+                // 所有beanDefinition中的bean的类型
+                Class<?> clazz1 = Class.forName(beanDefinition.getBeanClassName());
+                // clazz是否是clazz1的父类型
+                if (clazz.isAssignableFrom(clazz1)) {
+                    String beanName = beanDefinition.getBeanName();
+                    list.add((T) getBean(beanName));
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public Map<String, BeanDefinition> getBeanDefinitions() {
+        return beanDefinitions;
     }
 
     private void initBean(Object instance, BeanDefinition beanDefinition) {

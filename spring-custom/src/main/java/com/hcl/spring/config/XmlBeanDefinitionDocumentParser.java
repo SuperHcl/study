@@ -1,6 +1,7 @@
 package com.hcl.spring.config;
 
 import com.hcl.spring.factory.DefaultListableBeanFactory;
+import com.hcl.spring.util.ClassUtils;
 import com.hcl.spring.util.ReflectUtils;
 import org.dom4j.Element;
 
@@ -36,6 +37,22 @@ public class XmlBeanDefinitionDocumentParser {
     }
 
     private void parseCustomElement(Element element) {
+        if (element.getName().equals("component-scan")) {
+            String packageName = element.attributeValue("package");
+
+            List<String> beanClassNames = getBeanClassName(packageName);
+            BeanDefinition beanDefinition = null;
+            for (String beanClassName : beanClassNames) {
+                String beanName = beanClassName.substring(beanClassName.indexOf(".") + 1);
+                beanDefinition = new BeanDefinition(beanClassName, beanName);
+                registerBeanDefinition(beanName, beanDefinition);
+            }
+        }
+    }
+
+    private List<String> getBeanClassName(String packageName) {
+        // 获取项目路径下指定包名下面的所有类名，最终得到类似：com.hcl.spring.util.ReflectUtils
+        return ClassUtils.getClazzName(packageName, false);
     }
 
     private void parseDefaultElement(Element beanElement) {
