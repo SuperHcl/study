@@ -20,4 +20,7 @@ public class TestServlet extends HttpServlet {
         response.setContentType("text/plain;charset=UTF8");
         response.getWriter().write("just the test");
     }
+
+
+
 }

@@ -1,11 +1,14 @@
 package com.hcl.springmvc.servlet;
 
+import com.hcl.spring.factory.BeanFactory;
+import com.hcl.spring.factory.DefaultListableBeanFactory;
 import com.hcl.springmvc.handlerAdapter.HttpRequestHandlerAdapter;
 import com.hcl.springmvc.handlerAdapter.iface.HandlerAdapter;
 import com.hcl.springmvc.handlermapping.BeanNameUrlHandlerMapping;
 import com.hcl.springmvc.handlermapping.SimpleHandlerMapping;
 import com.hcl.springmvc.handlermapping.iface.HandlerMapping;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +26,20 @@ public class DispatcherServlet extends AbstractHttpServlet{
     private List<HandlerAdapter> handlerAdapters = new ArrayList<>();
 
     @Override
-    public void init() throws ServletException {
-        handlerMappings.add(new SimpleHandlerMapping());
-        handlerMappings.add(new BeanNameUrlHandlerMapping());
-        handlerAdapters.add(new HttpRequestHandlerAdapter());
+    public void init(ServletConfig config) throws ServletException {
+        String contextConfiguration = config.getInitParameter("contextConfigLocation");
+        // 创建spring的ioc容器
+        BeanFactory beanFactory = new DefaultListableBeanFactory(contextConfiguration);
+
+        // 一次性创建所有的ioc容器中的bean
+        beanFactory.getBeansByType(Object.class);
+        // 根据类型获取指定的bean，放入策略集合中。
+        handlerMappings = beanFactory.getBeansByType(HandlerMapping.class);
+        handlerAdapters = beanFactory.getBeansByType(HandlerAdapter.class);
+//
+//        handlerMappings.add(new SimpleHandlerMapping());
+//        handlerMappings.add(new BeanNameUrlHandlerMapping());
+//        handlerAdapters.add(new HttpRequestHandlerAdapter());
     }
 
     @Override

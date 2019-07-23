@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <!--配置处理器适配器 start-->
+    <bean class="com.hcl.springmvc.handlerAdapter.RequestMappingHandlerAdapter"></bean>
+    <bean class="com.hcl.springmvc.handlerAdapter.HttpRequestHandlerAdapter"></bean>
+    <!--配置处理器适配器 end-->
+
+    <!-- 配置处理器映射器 start-->
+    <bean class="com.hcl.springmvc.handlermapping.SimpleHandlerMapping"></bean>
+    <bean class="com.hcl.springmvc.handlermapping.BeanNameUrlHandlerMapping" init-Method="initMethod"></bean>
+    <bean class="com.hcl.springmvc.handlermapping.RequestMappingHandlerMapping" init-Method="initMethod"></bean>
+    <!-- 配置处理器映射器 end-->
+
+    <compant-scan package="com.hcl.springmvc.handler"/>
+
+</beans>
