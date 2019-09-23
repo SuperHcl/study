@@ -31,6 +31,7 @@ public class HeartBeatServer {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
 //                            pipeline.addLast(new HttpServerCodec());
+                            // 接受客户端发送过来的请求信息，应该是解码StringDecoder()
                             pipeline.addLast(new StringDecoder());
                             pipeline.addLast(new IdleStateHandler(5, 0,0));
                             pipeline.addLast(new HeartBeatServerHandler());

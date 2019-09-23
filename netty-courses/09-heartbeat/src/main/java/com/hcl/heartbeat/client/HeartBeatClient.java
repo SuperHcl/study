@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 /**
  * @author: Hucl
@@ -26,7 +27,13 @@ public class HeartBeatClient {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new StringDecoder());
+                        /*
+                         * 客户端向服务端发送信息，应该是StringEncoder()
+                         */
+                        // StringDecoder() 读（解码）
+                        // pipeline.addLast(new StringDecoder());
+                        // StringEncoder() 写（转码）
+                        pipeline.addLast(new StringEncoder());
                         pipeline.addLast(new HeartBeatClientHandler());
                     }
                 });

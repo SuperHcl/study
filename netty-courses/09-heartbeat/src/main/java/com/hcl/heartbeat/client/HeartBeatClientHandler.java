@@ -24,7 +24,7 @@ public class HeartBeatClientHandler extends ChannelInboundHandlerAdapter {
 
     private void randomSendHeartBeat(Channel channel) {
         // 生成一个[1,8)的随机数作为心跳发送间隔
-        int heartBeatInternal = new Random().nextInt(7) + 1;
+        int heartBeatInternal = new Random().nextInt(5) + 1;
         System.out.println(heartBeatInternal + "秒后将发送下一次心跳");
 
         ScheduledFuture<?> schedule = channel.eventLoop().schedule(() -> {
