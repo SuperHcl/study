@@ -33,6 +33,15 @@ public class HeartBeatServer {
 //                            pipeline.addLast(new HttpServerCodec());
                             // 接受客户端发送过来的请求信息，应该是解码StringDecoder()
                             pipeline.addLast(new StringDecoder());
+                            /**
+                             * 单位秒
+                             * @param readerIdleTimeSeconds 读取超时时间(No data was received for a while)
+                             * @param writerIdleTimeSeconds 写超时时间(No data was sent for a while)
+                             * @param allIdleTimeSeconds 即没读也没写(No data was either received or sent for a while)
+                             * new IdleStateHandler(int readerIdleTimeSeconds,
+                             *             int writerIdleTimeSeconds,
+                             *             int allIdleTimeSeconds)
+                             */
                             pipeline.addLast(new IdleStateHandler(5, 0,0));
                             pipeline.addLast(new HeartBeatServerHandler());
                         }
