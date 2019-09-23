@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author: Hucl
  * @date: 2019/9/23 17:36
- * @description:
+ * @description: 自定义客户端处理器
+ * 这种方式当服务器断开连接后，该客户端还是会向服务端发送心跳，并不会停止发送，不友好。
  */
 public class HeartBeatClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -23,7 +24,7 @@ public class HeartBeatClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     private void randomSendHeartBeat(Channel channel) {
-        // 生成一个[1,8)的随机数作为心跳发送间隔
+        // 生成一个[1,6)的随机数作为心跳发送间隔
         int heartBeatInternal = new Random().nextInt(5) + 1;
         System.out.println(heartBeatInternal + "秒后将发送下一次心跳");
 
