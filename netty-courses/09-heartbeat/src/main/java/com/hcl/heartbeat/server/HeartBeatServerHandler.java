@@ -13,7 +13,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 public class HeartBeatServerHandler extends SimpleChannelInboundHandler {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("接收到客户端发送的心跳: " + msg);
+        System.out.println("接收到客户端发送的心跳: " + System.currentTimeMillis() + "--" + msg);
     }
 
     @Override
@@ -21,11 +21,11 @@ public class HeartBeatServerHandler extends SimpleChannelInboundHandler {
         if (evt instanceof IdleStateEvent) {
             IdleState stateEvent = ((IdleStateEvent) evt).state();
             if (stateEvent == IdleState.READER_IDLE) {
-                System.out.println("将连接断开");
+                System.out.println("将连接断开\n");
                 ctx.disconnect();
             }
         } else {
-            super.userEventTriggered(ctx,evt);
+            super.userEventTriggered(ctx, evt);
         }
     }
 
