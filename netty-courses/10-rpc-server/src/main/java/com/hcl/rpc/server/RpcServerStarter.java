@@ -9,7 +9,7 @@ public class RpcServerStarter {
 
     public static void main(String[] args) throws Exception {
         RpcServer rpcServer = new RpcServer();
-        rpcServer.publish("com.hcl.rpc.api.service");
+        rpcServer.publish("com.hcl.rpc.service");
         rpcServer.start();
     }
 }

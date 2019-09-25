@@ -22,24 +22,25 @@ import java.lang.reflect.Proxy;
 public class RpcProxy {
 
     @SuppressWarnings("unchecked")
-    public static <T> T create(final Class<?> clazz) {
+    public static <T> T create(Class<?> clazz) {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(),
                 new Class[]{clazz},
                 new InvocationHandler() {
+                    @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        // 当调用的是Object中的方法，则直接进行本地调用
-                        if (Object.class.equals(method.getDeclaringClass())) {
+                        // 若调用的是Object中的方法，则直接进行本地调用
+                        if(Object.class.equals(method.getDeclaringClass())) {
                             // 本地调用
                             return method.invoke(this, args);
                         }
-                        // 远程调用
+                        // 进行远程调用
                         return rpcInvoke(clazz, method, args);
                     }
                 });
     }
 
     private static Object rpcInvoke(Class<?> clazz, Method method, Object[] args) {
-        final RpcClientHandler handler = new RpcClientHandler();
+        RpcClientHandler handler = new RpcClientHandler();
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
@@ -56,8 +57,8 @@ public class RpcProxy {
 
                         }
                     });
-            ChannelFuture future = bootstrap.connect("localhost", 8888).sync();
 
+            ChannelFuture future = bootstrap.connect("localhost", 8888).sync();
             future.channel().writeAndFlush(getInvokeMessage(clazz, method, args)).sync();
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
@@ -73,7 +74,7 @@ public class RpcProxy {
         InvokeMessage message = new InvokeMessage();
         message.setClassName(clazz.getName());
         message.setMethodName(method.getName());
-        message.setParamTypes(message.getParamTypes());
+        message.setParamTypes(method.getParameterTypes());
         message.setParamValues(args);
         return message;
     }

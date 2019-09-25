@@ -6,7 +6,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.serialization.ClassResolver;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
@@ -72,7 +71,7 @@ public class RpcServer {
             }
         }
 
-        System.out.println(classCache);
+//        System.out.println(classCache);
 
     }
 
@@ -122,9 +121,11 @@ public class RpcServer {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         RpcServer server = new RpcServer();
-        server.getProviderClass("com.hcl.rpc.api.service");
+        server.publish("com.hcl.rpc.service");
+        System.out.println(server.classCache);
+        System.out.println(server.registryMap);
 
     }
 
