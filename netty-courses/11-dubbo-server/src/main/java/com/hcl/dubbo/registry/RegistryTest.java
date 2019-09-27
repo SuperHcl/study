@@ -9,7 +9,7 @@ public class RegistryTest {
     public static void main(String[] args) throws Exception {
         RegistryCenter registryCenter = new ZKRegistryCenter();
 
-        registryCenter.register("com.hcl.dubbo.service", "localhost:8888");
+        registryCenter.register("com.hcl.dubbo.service", "localhost:9999");
         System.in.read();
     }
 }

@@ -8,5 +8,5 @@ package com.hcl.dubbo.constant;
 public class ZkConstant {
     public static final String ZK_CLUSTER = "192.168.121.24:2181";
 
-    public static final String ZK_DUBBO_ROOT_PATH = "/dubboregistries";
+    public static final String ZK_DUBBO_ROOT_PATH = "/dubbocustom";
 }
