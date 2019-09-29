@@ -2,13 +2,15 @@ package com.hcl.dubbo.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author: Hucl
  * @date: 2019/9/26 16:55
  * @description:
  */
 @Data
-public class InvokeMessage {
+public class InvokeMessage implements Serializable {
     /*接口名称，即服务名称*/
     private String className;
 
