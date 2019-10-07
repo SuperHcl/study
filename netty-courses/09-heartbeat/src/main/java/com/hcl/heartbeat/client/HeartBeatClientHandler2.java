@@ -4,6 +4,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.ScheduledFuture;
 
 import java.util.Random;
@@ -15,6 +16,10 @@ import java.util.concurrent.TimeUnit;
  * @description:
  */
 public class HeartBeatClientHandler2 extends ChannelInboundHandlerAdapter {
+
+    private ScheduledFuture<?> schedule;
+
+    private GenericFutureListener listener;
 
     private Bootstrap bootstrap;
 
@@ -29,10 +34,10 @@ public class HeartBeatClientHandler2 extends ChannelInboundHandlerAdapter {
 
     private void randomSendHeartBeat(Channel channel) {
         // 生成一个[1,6)的随机数作为心跳发送间隔
-        int heartBeatInternal = new Random().nextInt(5) + 1;
+        int heartBeatInternal = new Random().nextInt(6) + 1;
         System.out.println(heartBeatInternal + "秒后将发送下一次心跳");
 
-        ScheduledFuture<?> schedule = channel.eventLoop().schedule(() -> {
+        schedule = channel.eventLoop().schedule(() -> {
             if (channel.isActive()) {
                 System.out.println("向heart beat server发送心跳");
                 channel.writeAndFlush("~PING~" + heartBeatInternal);
@@ -42,13 +47,12 @@ public class HeartBeatClientHandler2 extends ChannelInboundHandlerAdapter {
             }
         }, heartBeatInternal, TimeUnit.SECONDS);
 
+        listener = future -> {
+            randomSendHeartBeat(channel);
+        };
+
         // 为异步定时任务添加监听器
-        schedule.addListener((future) -> {
-            // 若异步定时任务执行成功，则重新再随机发送心跳
-            if (future.isSuccess()) {
-                randomSendHeartBeat(channel);
-            }
-        });
+        schedule.addListener(listener);
     }
 
     /**
@@ -58,6 +62,7 @@ public class HeartBeatClientHandler2 extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        schedule.removeListener(listener);
         ctx.channel().eventLoop().schedule(() -> {
             System.out.println("Reconnecting\n");
             try {
