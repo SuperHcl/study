@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+
+  instance:
+    instance-id: hcl-provider-test
+
+spring:
+  application:
+    name: hcl-provider-8081
