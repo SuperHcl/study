@@ -13,4 +13,6 @@
         <!--Integer类型-->
         <property name="age" value="18"></property>
     </bean>
+
+    <bean id="awareTest" class="com.hcl.spring.po.AwareTest"></bean>
 </beans>

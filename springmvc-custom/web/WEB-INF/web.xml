@@ -19,6 +19,9 @@
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>com.hcl.springmvc.servlet.DispatcherServlet</servlet-class>
-
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
     </servlet>
 </web-app>

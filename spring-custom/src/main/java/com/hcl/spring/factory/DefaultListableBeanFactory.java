@@ -1,5 +1,7 @@
 package com.hcl.spring.factory;
 
+import com.hcl.spring.aware.Aware;
+import com.hcl.spring.aware.BeanFactoryAware;
 import com.hcl.spring.config.*;
 import com.hcl.spring.converter.IntegerTypeConverter;
 import com.hcl.spring.converter.StringTypeConverter;
@@ -109,10 +111,18 @@ public class DefaultListableBeanFactory extends AbstractBeanFactory {
     }
 
     private void initBean(Object instance, BeanDefinition beanDefinition) {
+        // 判断aware是不是instance实例的接口
+        // 操作Aware接口
+        if (instance instanceof Aware) {
+            if (instance instanceof BeanFactoryAware) {
+                ((BeanFactoryAware) instance).setBeanFactory(this);
+            }
+        }
         String initMethod = beanDefinition.getInitMethod();
         if (initMethod == null || "".equals(initMethod)) {
             return;
         }
+        // 执行初始化方法
         ReflectUtils.invokeMethod(instance, initMethod);
     }
 

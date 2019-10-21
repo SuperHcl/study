@@ -11,6 +11,6 @@
     <bean class="com.hcl.springmvc.handlermapping.RequestMappingHandlerMapping" init-Method="initMethod"></bean>
     <!-- 配置处理器映射器 end-->
 
-    <compant-scan package="com.hcl.springmvc.handler"/>
+    <component-scan package="com.hcl.springmvc.handler"/>
 
 </beans>

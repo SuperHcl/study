@@ -83,7 +83,7 @@ public class GenericTokenParser {
 
     public static void main(String[] args) {
         GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", new ParameterMappingTokenHandler());
-        String result = genericTokenParser.parse("select * from user where user id = #{id}");
+        String result = genericTokenParser.parse("select * from user where user id = #{ID} and name =#{NAME}");
         System.out.println(result);
     }
 }

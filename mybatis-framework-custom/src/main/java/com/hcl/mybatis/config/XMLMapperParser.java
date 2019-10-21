@@ -68,7 +68,7 @@ public class XMLMapperParser extends BaseBuilder {
     }
 
     /**
-     * 这种方式智能获取对象类型的，就连八种基本类型的封装类都获取不了
+     * 这种方式只能获取对象类型的，就连八种基本类型的封装类都获取不了
      * 局限性比较高 推荐使用{@link BaseBuilder#resolveClass(String)}
      * @param parameterType class..
      * @return Class
