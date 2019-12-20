@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="supergo-seckill-service" />
+        <module name="supergo-data-monitor" />
+        <module name="supergo-order-service" />
+        <module name="supergo-manager-service" />
+        <module name="supergo-page-feign" />
+        <module name="supergo-user-service" />
+        <module name="supergo-user-feign" />
+        <module name="supergo-page-service" />
+        <module name="lcn-transaction-consumer" />
+        <module name="supergo-cart-service" />
+        <module name="supergo-mapper" />
+        <module name="supergo-portal-web" />
+        <module name="lock-redis-demo" />
+        <module name="supergo-item-web" />
+        <module name="supergo-page-web" />
+        <module name="supergo-spring-boot-lcn" />
+        <module name="supergo-auth" />
+        <module name="supergo-common" />
+        <module name="supergo-zuul" />
+        <module name="supergo-spring-boot-transaction" />
+        <module name="supergo-pay-web" />
+        <module name="supergo-eureka" />
+        <module name="supergo-order-web" />
+        <module name="supergo-seckill-web" />
+        <module name="lcn-transaction-provider" />
+        <module name="rocketmq-demo" />
+        <module name="supergo-shop-web" />
+        <module name="supergo-seckill-task" />
+        <module name="supergo-pay-service" />
+        <module name="supergo-search-web" />
+        <module name="supergo-search-service" />
+        <module name="supergo-pojo" />
+        <module name="supergo-manager-feign" />
+        <module name="supergo-order-feign" />
+        <module name="supergo-seckill-feign" />
+        <module name="supergo-manager-web" />
+        <module name="supergo-base-service" />
+        <module name="supergo-cart-web" />
+        <module name="supergo-user-web" />
+        <module name="supergo-cart-feign" />
+        <module name="lock-zk-demo" />
+        <module name="alipay" />
+        <module name="supergo-pay-feign" />
+        <module name="supergo-monitor" />
+        <module name="supergo-search-feign" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alipay" target="1.5" />
+      <module name="lcn-transaction-consumer" target="1.8" />
+      <module name="lcn-transaction-provider" target="1.8" />
+      <module name="lcn-transation-demo-parent" target="1.8" />
+      <module name="lock-demo-parent" target="1.8" />
+      <module name="lock-redis-demo" target="1.8" />
+      <module name="lock-zk-demo" target="1.8" />
+      <module name="rocketmq-demo" target="1.8" />
+      <module name="supergo-auth" target="1.8" />
+      <module name="supergo-base-service" target="1.8" />
+      <module name="supergo-cart" target="1.8" />
+      <module name="supergo-cart-feign" target="1.8" />
+      <module name="supergo-cart-service" target="1.8" />
+      <module name="supergo-cart-web" target="1.8" />
+      <module name="supergo-common" target="1.8" />
+      <module name="supergo-data-monitor" target="1.8" />
+      <module name="supergo-eureka" target="1.8" />
+      <module name="supergo-item-web" target="1.8" />
+      <module name="supergo-manager" target="1.8" />
+      <module name="supergo-manager-feign" target="1.8" />
+      <module name="supergo-manager-service" target="1.8" />
+      <module name="supergo-manager-web" target="1.8" />
+      <module name="supergo-mapper" target="1.8" />
+      <module name="supergo-monitor" target="1.8" />
+      <module name="supergo-order" target="1.8" />
+      <module name="supergo-order-feign" target="1.8" />
+      <module name="supergo-order-service" target="1.8" />
+      <module name="supergo-order-web" target="1.8" />
+      <module name="supergo-page" target="1.8" />
+      <module name="supergo-page-feign" target="1.8" />
+      <module name="supergo-page-service" target="1.8" />
+      <module name="supergo-page-web" target="1.8" />
+      <module name="supergo-parent" target="1.8" />
+      <module name="supergo-pay" target="1.8" />
+      <module name="supergo-pay-feign" target="1.8" />
+      <module name="supergo-pay-service" target="1.8" />
+      <module name="supergo-pay-web" target="1.8" />
+      <module name="supergo-pojo" target="1.8" />
+      <module name="supergo-portal-web" target="1.8" />
+      <module name="supergo-search" target="1.8" />
+      <module name="supergo-search-feign" target="1.8" />
+      <module name="supergo-search-service" target="1.8" />
+      <module name="supergo-search-web" target="1.8" />
+      <module name="supergo-seckill" target="1.8" />
+      <module name="supergo-seckill-feign" target="1.8" />
+      <module name="supergo-seckill-service" target="1.8" />
+      <module name="supergo-seckill-task" target="1.8" />
+      <module name="supergo-seckill-web" target="1.8" />
+      <module name="supergo-shop-web" target="1.8" />
+      <module name="supergo-spring-boot-lcn" target="1.8" />
+      <module name="supergo-spring-boot-transaction" target="1.8" />
+      <module name="supergo-user" target="1.8" />
+      <module name="supergo-user-feign" target="1.8" />
+      <module name="supergo-user-service" target="1.8" />
+      <module name="supergo-user-web" target="1.8" />
+      <module name="supergo-zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lcn-transaction-consumer" options="-parameters" />
+      <module name="lcn-transaction-provider" options="-parameters" />
+      <module name="lock-redis-demo" options="-parameters" />
+      <module name="lock-zk-demo" options="-parameters" />
+      <module name="rocketmq-demo" options="-parameters" />
+      <module name="supergo-auth" options="-parameters" />
+      <module name="supergo-base-service" options="-parameters" />
+      <module name="supergo-cart-feign" options="-parameters" />
+      <module name="supergo-cart-service" options="-parameters" />
+      <module name="supergo-cart-web" options="-parameters" />
+      <module name="supergo-common" options="-parameters" />
+      <module name="supergo-data-monitor" options="-parameters" />
+      <module name="supergo-eureka" options="-parameters" />
+      <module name="supergo-item-web" options="-parameters" />
+      <module name="supergo-manager-feign" options="-parameters" />
+      <module name="supergo-manager-service" options="-parameters" />
+      <module name="supergo-manager-web" options="-parameters" />
+      <module name="supergo-mapper" options="-parameters" />
+      <module name="supergo-monitor" options="-parameters" />
+      <module name="supergo-order-feign" options="-parameters" />
+      <module name="supergo-order-service" options="-parameters" />
+      <module name="supergo-order-web" options="-parameters" />
+      <module name="supergo-page-feign" options="-parameters" />
+      <module name="supergo-page-service" options="-parameters" />
+      <module name="supergo-page-web" options="-parameters" />
+      <module name="supergo-pay-feign" options="-parameters" />
+      <module name="supergo-pay-service" options="-parameters" />
+      <module name="supergo-pay-web" options="-parameters" />
+      <module name="supergo-pojo" options="-parameters" />
+      <module name="supergo-portal-web" options="-parameters" />
+      <module name="supergo-search-feign" options="-parameters" />
+      <module name="supergo-search-service" options="-parameters" />
+      <module name="supergo-search-web" options="-parameters" />
+      <module name="supergo-seckill-feign" options="-parameters" />
+      <module name="supergo-seckill-service" options="-parameters" />
+      <module name="supergo-seckill-task" options="-parameters" />
+      <module name="supergo-seckill-web" options="-parameters" />
+      <module name="supergo-shop-web" options="-parameters" />
+      <module name="supergo-spring-boot-lcn" options="-parameters" />
+      <module name="supergo-spring-boot-transaction" options="-parameters" />
+      <module name="supergo-user-feign" options="-parameters" />
+      <module name="supergo-user-service" options="-parameters" />
+      <module name="supergo-user-web" options="-parameters" />
+      <module name="supergo-zuul" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>supergo-parent</artifactId>
+        <groupId>com.supergo</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>supergo-eureka</artifactId>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.boot.mainclass>com.supergo.EurekaApplication</spring.boot.mainclass>
+    </properties>
+
+
+    <!--注册中心-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <!--用于指定镜像名称-->
+                    <imageName>192.168.66.66:5000/${project.artifactId}:${project.version}</imageName>
+                    <!--用于指定基础镜像，相当于Dockerfile中的FROM指令-->
+                    <baseImage>jdk1.8:v1</baseImage>
+                    <!--指定工作目录-->
+                    <!--<workdir>/</workdir>-->
+                    <!--相当于Dockerfile的ENTRYPOINT指令-->
+                    <entryPoint>["java","-jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <!--是否跳过docker build-->
+                    <!--<skipDockerBuild>true</skipDockerBuild>-->
+                    <resources>
+                        <resource>
+                            <!--workdir 工作目录-->                            
+                            <targetPath>/</targetPath>
+                            <!--用于指定需要复制的根目录，${project.build.directory}表示target目录-->                            
+                            <directory>${project.build.directory}</directory>
+                            <!--用于指定需要复制的文件。${project.build.finalName}.jar指的是打包后的jar包文件-->                           
+                            <include>${project.build.finalName}.jar</include>                                        
+                        </resource>
+                    </resources>
+                    <dockerHost>http://192.168.66.66:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

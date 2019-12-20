@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ideaMaven-git:war">
+    <output-path>$PROJECT_DIR$/alipay/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ideaMaven-git</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="lcks-SSM.war">
+      <element id="artifact" artifact-name="ideaMaven-git:war exploded" />
+    </root>
+  </artifact>
+</component>

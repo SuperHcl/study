@@ -1,0 +1,40 @@
+{
+  "goods": {
+    "dynamic":  false,
+    "properties": {
+      "goodsName": {
+        "type": "completion",
+        "fields": {
+          "pinyin": {
+            "type": "completion",
+            "analyzer": "pinyin_analyzer"
+          },
+          "keyword_pinyin": {
+            "type": "completion",
+            "analyzer": "full_pinyin_letter_analyzer"
+          },
+          "keyword_first_py": {
+            "type": "completion",
+            "analyzer": "first_py_letter_analyzer"
+          }
+        }
+      },
+      "itemName": {
+        "type": "text",
+        "fields": {
+          "cn": {
+            "type": "text",
+            "analyzer": "ik_smart"
+          },
+          "en": {
+            "type": "text",
+            "analyzer": "english"
+          }
+        }
+      },
+      "classify": {
+        "type": "integer"
+      }
+    }
+  }
+}

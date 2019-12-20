@@ -1,0 +1,68 @@
+server:
+  port: 9999
+  servlet:
+    context-path: /api #服务端口
+spring:
+  application:
+    name: supergo-zuul #指定服务名
+zuul:
+  routes:
+    manager-web:
+      path: /manager/** # 这里是映射路径
+      #url: http://127.0.0.1:8081 # 映射路径对应的实际url地址
+      serviceId: supergo-manager-web #服务的名称
+    portal-web:
+      path: /portal/**
+      serviceId: supergo-portal-web
+    shop-web:
+      path: /shop/**
+      serviceId: supergo-shop-web
+    user-web:
+      path: /user/**
+      serviceId: supergo-user-web
+    order-web:
+      path: /order/**
+      serviceId: supergo-order-web
+    pay-web:
+      path: /pay/**
+      serviceId: supergo-pay-web
+    seckill-web:
+      path: /seckill/**
+      serviceId: supergo-seckill-web
+    cart-web:
+      path: /cart/**
+      serviceId: supergo-cart-web
+    search-web:
+      path: /search/**
+      serviceId: supergo-search-web
+    page-web:
+      path: /page/**
+      serviceId: supergo-page-web
+  retryable: true
+  sensitive-headers: #请求头跨系统发送token秘钥
+  host:
+    connect-timeout-millis: 50000
+    socket-timeout-millis: 50000
+    connection-request-timeout-millis: 50000
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5 # 获取服务列表的周期：5s
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${eureka.instance.ip-address}.${server.port}
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 10
+    health-check-url-path: /api/actuator/health #网关设置了根路径，默认监控路径发生了变化
+management:
+  endpoint:
+    shutdown:
+      enabled: true #开启端点
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"

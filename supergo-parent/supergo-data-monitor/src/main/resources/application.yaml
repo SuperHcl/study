@@ -1,0 +1,61 @@
+server:
+  port: 9096
+spring:
+  application:
+    name: supergo-data-monitor
+  datasource: #Jdbc数据源配置
+    url: jdbc:mysql://127.0.0.1:3306/pinyougoudb?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+    druid: #连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 1000
+      test-on-borrow: true
+      #  数据源监控开始
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        allow: 127.0.0.1 #IP 白名单
+        url-pattern: /druid/* #监控地址,默认 /druid/*
+        login-username: jackhu
+        login-password: admin
+        #        deny:IP 黑名单
+        #数据源监控结束
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+    instance-id: ${eureka.instance.ip-address}.${server.port}
+    lease-renewal-interval-in-seconds: 3
+    lease-expiration-duration-in-seconds: 10
+mybatis:
+  type-aliases-package: com.supergo.pojo
+mapper:
+  not-empty: false
+  identity: mysql
+management:
+  endpoint:
+    shutdown:
+      enabled: true #开启端点
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
