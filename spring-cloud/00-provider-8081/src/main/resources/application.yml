@@ -7,15 +7,20 @@ server:
 eureka:
   client:
     service-url:
+      # 当前客户端连接的eureka的地址
       defaultZone: http://localhost:8000/eureka/
 
   instance:
+    # 指当前客户端在eureka注册中心的名称
     instance-id: hcl-provider-test
 #    # 是否注册IP到eureka server，如不指定或设为false，那就会注册主机名到eureka server
 #    prefer-ip-address: true
 
 spring:
   application:
+    # 指当前微服务对外暴露的名称
+    # 没用eureka之前是通过url+port直连的方式，坏处是url改变，消费者的请求地址也需要改变
+    # 这种相当于给url和port起了个别名
     name: hcl-provider-8081
 
   jpa:
@@ -34,6 +39,8 @@ spring:
     username: root
     password: 123456
 
+
+# 日志配置
 logging:
   pattern:
     console: level-%level %msg%n
@@ -45,3 +52,6 @@ logging:
     # 指定spring.jpa.show-sql为true时，是否显示查询语句的查询结果
     org.hibernate.type.descriptor.sql.BasicExtractor: trace
 
+info:
+  app.name: hcl-springcloud-test
+  author: huchangliang
