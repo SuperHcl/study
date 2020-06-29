@@ -1,7 +1,12 @@
 package com.hcl.example.bean;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 
 /**
@@ -9,11 +14,15 @@ import lombok.experimental.Accessors;
  * @date: 2019/10/18 15:26
  * @description:
  */
-@Data
+@ToString
+@Setter
+@Getter
 @Accessors(chain = true)
-public class User {
+public class User implements Serializable {
 
+    private int id;
     private String name;
-
+    private String address;
     private Integer age;
+    private String email;
 }

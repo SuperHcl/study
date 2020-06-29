@@ -17,7 +17,6 @@ import java.util.Objects;
  * @description: 服务提供者
  */
 @RestController
-@RequestMapping("/provider")
 @Slf4j
 public class TestProviderController {
     @Autowired
