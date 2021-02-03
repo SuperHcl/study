@@ -1,9 +1,7 @@
 package com.hcl.spring.test;
 
-import com.hcl.spring.aware.Aware;
 import com.hcl.spring.factory.BeanFactory;
 import com.hcl.spring.factory.DefaultListableBeanFactory;
-import com.hcl.spring.po.AwareTest;
 import com.hcl.spring.po.Student;
 import org.junit.Test;
 
@@ -22,10 +20,10 @@ public class CustomTest {
         // 创建bean工厂
         BeanFactory beanFactory = new DefaultListableBeanFactory(location);
         // 获取对象实例
-//        Student student = (Student) beanFactory.getBean("student");
-//        System.out.println(student.toString());
+        Student student = (Student) beanFactory.getBean("student");
+        System.out.println(student.toString());
 
-        AwareTest awareTest = (AwareTest) beanFactory.getBean("awareTest");
-        awareTest.test();
+//        AwareTest awareTest = (AwareTest) beanFactory.getBean("awareTest");
+//        awareTest.test();
     }
 }
