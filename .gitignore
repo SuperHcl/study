@@ -1,0 +1,14 @@
+.idea
+.idea/workspace.xml
+*.iml
+logs
+.DS_Store
+data
+
+**/target/
+
+
+*/target
+**/src/test/
+/config/
+
