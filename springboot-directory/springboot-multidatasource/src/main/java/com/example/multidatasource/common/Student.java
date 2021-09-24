@@ -2,6 +2,7 @@ package com.example.multidatasource.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author hucl
@@ -9,6 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class Student {
 
     private Long id;
