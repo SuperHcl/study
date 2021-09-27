@@ -2,6 +2,7 @@ package com.example.multidatasource.jdbc;
 
 import com.example.multidatasource.common.Student;
 import com.example.multidatasource.common.StudentService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class JDBCTemStudentServiceImpl implements StudentService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JDBCTemStudentServiceImpl(JdbcTemplate jdbcTemplate) {
+    public JDBCTemStudentServiceImpl(@Qualifier("primaryJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-    @Select("select * from student where name = #{name}")
-    Student findByName(@Param("name") String name);
+    @Select("select * from student where name = #{inner.student.name}")
+    Student findByName(@Param("inner") InnerStudent student);
 
     @Select("select * from student where id = #{id}")
     Student findById(Long id);
