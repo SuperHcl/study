@@ -19,7 +19,7 @@ public class JDBCTemStudentServiceImpl implements StudentService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JDBCTemStudentServiceImpl(@Qualifier("primaryJdbcTemplate") JdbcTemplate jdbcTemplate) {
+    public JDBCTemStudentServiceImpl(/*@Qualifier("primaryJdbcTemplate")*/ JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

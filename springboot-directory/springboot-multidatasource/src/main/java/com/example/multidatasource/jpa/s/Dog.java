@@ -1,8 +1,9 @@
-package com.example.multidatasource.jpa;
+package com.example.multidatasource.jpa.s;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,8 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+@ToString
+public class Dog {
     @Id
     @GeneratedValue
     private Long id;
@@ -25,7 +27,7 @@ public class User {
 
     private Integer age;
 
-    public User(String name, Integer age) {
+    public Dog(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
