@@ -30,6 +30,7 @@ public class TestProviderController {
 
     /**
      * 列出eureka中的服务列表
+     *
      * @return List
      */
     @GetMapping("/discovery")

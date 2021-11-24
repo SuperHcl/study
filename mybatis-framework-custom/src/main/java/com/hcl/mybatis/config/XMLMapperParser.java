@@ -44,10 +44,10 @@ public class XMLMapperParser extends BaseBuilder {
         id = namespace + "." + id;
         // 获取的参数类型的全路径
         String parameterType = element.attributeValue("parameterType");
-        Class<?> parameterTypeClass = resolveClass(parameterType);
+        Class<?> parameterTypeClass = getClassType(parameterType);
 
         String resultType = element.attributeValue("resultType");
-        Class<?> resultTypeClass = resolveClass(resultType);
+        Class<?> resultTypeClass = getClassType(resultType);
 
         String statementType = element.attributeValue("statementType");
 //        String operatorValue = element.getStringValue().trim();
