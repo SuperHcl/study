@@ -17,7 +17,7 @@ public interface StudentMapper {
 
     List<StudentDAO> findByParam(@Param("params") Map<String, Object> params);
 
-    List<StudentDAO> findByStudent(@Param("student") StudentDAO studentDAO);
+    List<StudentDAO> findByStudent(/*@Param("student") */StudentDAO params);
 
     StudentDAO findOneByStudent(StudentDAO studentDAO);
 }

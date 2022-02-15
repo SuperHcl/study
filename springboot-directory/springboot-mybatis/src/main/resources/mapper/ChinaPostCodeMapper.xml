@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootmybatis.repository.mapper.ChinaPostCodeMapper">
+
+    <select id="queryChinaPostCodeList"
+            resultType="com.example.springbootmybatis.repository.dao.ChinaPostCodeDAO">
+        select a.code, a.name from CHINA_POST_CODE a
+        <where>
+            <if test="type != null and type != ''">
+                and a.type = #{type}
+            </if>
+            <if test="code != null and code != ''">
+                and a.parent_code = #{code}
+            </if>
+        </where>
+    </select>
+</mapper>

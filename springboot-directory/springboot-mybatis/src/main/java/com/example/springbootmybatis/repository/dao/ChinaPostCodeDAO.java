@@ -4,15 +4,15 @@ import lombok.Data;
 
 /**
  * @author Hu.ChangLiang
- * @date 2021/9/30 2:16 下午
+ * @date 2022/1/17 9:29 下午
  */
 @Data
-public class StudentDAO {
-    private Long id;
+public class ChinaPostCodeDAO {
+    private String code;
 
     private String name;
 
-    private Integer age;
+    private String type;
 
-    private String address;
+    private String parentCode;
 }
