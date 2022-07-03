@@ -1,5 +1,6 @@
 package com.hcl.ssd.config;
 
+import com.hcl.ssd.handler.MyAuthErrorHandler;
 import com.hcl.ssd.handler.MyAuthSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .successForwardUrl("/toMain")
                 .successHandler(new MyAuthSuccessHandler("http://www.baidu.com"))
                 // 登录失败后跳转的页面
-                .failureForwardUrl("/toError")
+//                .failureForwardUrl("/toError")
+                .failureHandler(new MyAuthErrorHandler("/error.html"))
         ;
 
         // 授权认证
