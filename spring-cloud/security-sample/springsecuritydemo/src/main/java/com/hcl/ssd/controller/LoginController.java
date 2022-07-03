@@ -2,6 +2,7 @@ package com.hcl.ssd.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -24,5 +25,10 @@ public class LoginController {
     public String toError() {
         log.info("...跳转失败页面....");
         return "redirect:error.html";
+    }
+
+    @GetMapping("/demo")
+    public String demo() {
+        return "demo";
     }
 }

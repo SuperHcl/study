@@ -4,6 +4,7 @@ import com.hcl.ssd.handler.MyAuthErrorHandler;
 import com.hcl.ssd.handler.MyAuthSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,17 +28,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 设置登录页
                 .loginPage("/login.html")
                 // 登录成功后跳转页面，POST请求
-//                .successForwardUrl("/toMain")
-                .successHandler(new MyAuthSuccessHandler("http://www.baidu.com"))
+                .successForwardUrl("/toMain")
+                // 自定义登录成功处理器
+//                .successHandler(new MyAuthSuccessHandler("http://www.baidu.com"))
                 // 登录失败后跳转的页面
-//                .failureForwardUrl("/toError")
-                .failureHandler(new MyAuthErrorHandler("/error.html"))
+                .failureForwardUrl("/toError")
+                // 自定义登录失败处理器
+//                .failureHandler(new MyAuthErrorHandler("/error.html"))
         ;
 
         // 授权认证
         http.authorizeRequests()
                 // login.html放行
                 .antMatchers("/login.html", "/error.html").permitAll()
+                // 放行静态资源
+                .antMatchers("/**/*.jpeg", "/**/*.jpg").permitAll()
+                // 方法拦截，正则表达式的方式
+//                .regexMatchers(HttpMethod.GET, "/demo").permitAll()
+                // .hasAuthority() 拥有某种权限才能访问资源
+                .antMatchers("/image.html").hasAuthority("admin")
                 // 所有请求都需要被认证。必须登录之后才能够访问
                 .anyRequest().authenticated();
 
