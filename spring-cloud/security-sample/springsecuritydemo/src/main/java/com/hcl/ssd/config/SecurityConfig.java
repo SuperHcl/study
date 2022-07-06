@@ -46,7 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 方法拦截，正则表达式的方式
 //                .regexMatchers(HttpMethod.GET, "/demo").permitAll()
                 // .hasAuthority() 拥有某种权限才能访问资源
-                .antMatchers("/image.html").hasAuthority("admin")
+//                .antMatchers("/image.html").hasAuthority("admin")
+                // hasAnyAuthority("xx","@@") 多权限判断，拥有任何一个都行
+                .antMatchers("/image.html").hasAnyAuthority("Admin", "admin")
+                // 角色判断，ROLE_ 是在定义用户UserDetailsServiceImpl的时候开始的，abc是真正的权限，
+                // hasRole()不能带ROLE_, 启动会报错
+//                .antMatchers("/image.html").hasRole("abcd")
+                .antMatchers("/image.html").hasAnyRole("abc", "abcd")
                 // 所有请求都需要被认证。必须登录之后才能够访问
                 .anyRequest().authenticated();
 

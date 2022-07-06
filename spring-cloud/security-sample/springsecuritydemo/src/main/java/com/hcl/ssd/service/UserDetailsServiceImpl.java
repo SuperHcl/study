@@ -31,6 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String password = passwordEncoder.encode("123");
         // 返回user
         return new User(username, password,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
+                // ROLE_abc是角色定义，ROLE_是角色的固定前缀，一定要加
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal,ROLE_abc"));
     }
 }
