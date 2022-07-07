@@ -32,6 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // 返回user
         return new User(username, password,
                 // ROLE_abc是角色定义，ROLE_是角色的固定前缀，一定要加
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal,ROLE_abc"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal,ROLE_abc,/main.html"));
     }
 }

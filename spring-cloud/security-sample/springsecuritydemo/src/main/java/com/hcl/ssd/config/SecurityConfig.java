@@ -1,5 +1,6 @@
 package com.hcl.ssd.config;
 
+import com.hcl.ssd.handler.MyAccessDeniedHandler;
 import com.hcl.ssd.handler.MyAuthErrorHandler;
 import com.hcl.ssd.handler.MyAuthSuccessHandler;
 import org.springframework.context.annotation.Bean;
@@ -52,12 +53,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 角色判断，ROLE_ 是在定义用户UserDetailsServiceImpl的时候开始的，abc是真正的权限，
                 // hasRole()不能带ROLE_, 启动会报错
 //                .antMatchers("/image.html").hasRole("abcd")
-                .antMatchers("/image.html").hasAnyRole("abc", "abcd")
+//                .antMatchers("/image.html").hasAnyRole("abc", "abcd")
+                // .access()可以实现权限判断，要是看源码，hasAnyRole底层调用的也是access方法
+//                .antMatchers("/image.html").access("hasRole('abc')")
                 // 所有请求都需要被认证。必须登录之后才能够访问
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated()
+                .anyRequest().access("@myAuthServiceImpl.hasPermission(request, authentication)")
+        ;
 
         // 关闭csrf防护
         http.csrf().disable();
+
+        // 异常处理
+        http.exceptionHandling()
+                .accessDeniedHandler(new MyAccessDeniedHandler());
     }
 
     // 密码加密器
