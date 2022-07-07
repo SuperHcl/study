@@ -57,8 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // .access()可以实现权限判断，要是看源码，hasAnyRole底层调用的也是access方法
 //                .antMatchers("/image.html").access("hasRole('abc')")
                 // 所有请求都需要被认证。必须登录之后才能够访问
-//                .anyRequest().authenticated()
-                .anyRequest().access("@myAuthServiceImpl.hasPermission(request, authentication)")
+                .anyRequest().authenticated()
+//                .anyRequest().access("@myAuthServiceImpl.hasPermission(request, authentication)")
         ;
 
         // 关闭csrf防护
