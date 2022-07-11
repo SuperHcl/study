@@ -1,7 +1,8 @@
 package com.hcl.ss02.service;
 
-import com.hcl.ss02.pojo.User;
+//import com.hcl.ss02.pojo.User;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +25,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("---userService---");
         String password = passwordEncoder.encode("123456");
         return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
