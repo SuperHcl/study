@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @author Hu.ChangLiang
  * @date 2022/7/14 15:55
  */
-@Configuration
+//@Configuration
 public class TokenConfig {
 
     @Resource

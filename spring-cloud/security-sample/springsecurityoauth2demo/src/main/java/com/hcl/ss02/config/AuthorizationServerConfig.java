@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.annotation.Resource;
 
@@ -27,8 +28,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
     @Resource
     private UserService userService;
+    //    @Resource
+//    private TokenStore redisTokenStore;
     @Resource
-    private TokenStore redisTokenStore;
+    private TokenStore jwtTokenStore;
+    @Resource
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
 
     /**
      * 使用密码模式所需要做的配置
@@ -40,7 +45,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userService)
-                .tokenStore(redisTokenStore);
+//                .tokenStore(redisTokenStore)
+                .tokenStore(jwtTokenStore)
+                .accessTokenConverter(jwtAccessTokenConverter)
+
         ;
     }
 
