@@ -28,4 +28,9 @@ public class JwtTokenStoreConfig {
         converter.setSigningKey("test_key");
         return converter;
     }
+
+    @Bean
+    public JwtTokenEnhancer jwtTokenEnhancer() {
+        return new JwtTokenEnhancer();
+    }
 }

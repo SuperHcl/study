@@ -8,10 +8,14 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 授权服务器配置
@@ -34,6 +38,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private TokenStore jwtTokenStore;
     @Resource
     private JwtAccessTokenConverter jwtAccessTokenConverter;
+    @Resource
+    private JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
      * 使用密码模式所需要做的配置
@@ -43,12 +49,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        // 配置JWT内容增强器
+        TokenEnhancerChain chain = new TokenEnhancerChain();
+        List<TokenEnhancer> delegates = new ArrayList<>();
+        delegates.add(jwtTokenEnhancer);
+        delegates.add(jwtAccessTokenConverter);
+        chain.setTokenEnhancers(delegates);
+
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userService)
 //                .tokenStore(redisTokenStore)
                 .tokenStore(jwtTokenStore)
                 .accessTokenConverter(jwtAccessTokenConverter)
-
+                .tokenEnhancer(chain);
         ;
     }
 
