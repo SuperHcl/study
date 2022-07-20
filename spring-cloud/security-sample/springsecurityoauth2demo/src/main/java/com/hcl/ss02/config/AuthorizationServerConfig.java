@@ -80,7 +80,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("all")
                 // 配置授权模式 授权码模式
 //                .authorizedGrantTypes("authorization_code")
-                .authorizedGrantTypes("password")
+                // 授权模式：password密码模式，refresh_token刷新令牌，authorization_code授权码模式
+                .authorizedGrantTypes("password", "refresh_token", "authorization_code")
 
         ;
     }
