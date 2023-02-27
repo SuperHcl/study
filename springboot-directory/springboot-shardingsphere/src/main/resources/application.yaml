@@ -4,25 +4,26 @@ server:
 spring:
   shardingsphere:
     datasource:
-      names: test0
+      names: test0,test1
       test0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/test0?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&useSSL=false&allowMultiQueries=true
         password: root
         username: root
-#      test1:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        url: jdbc:mysql://127.0.0.1:3306/test1
-#        password: root
-#        username: root
+      test1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/test1?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&useSSL=false&allowMultiQueries=true
+        password: root
+        username: root
     props:
       sql-show: true
     rules:
       sharding:
         tables:
           user: #表名
-            actual-data-nodes: test0.user$->{0..1}
+            actual-data-nodes: test$->{0..1}.user$->{0..1}
             # 分片表的策略
             table-strategy:
               standard:
@@ -31,11 +32,21 @@ spring:
             key-generate-strategy:
               column: id
               key-generator-name: snowflake
+
+        default-database-strategy: # 数据库分库的策略
+          standard:
+            sharding-column: age
+            sharding-algorithm-name: database_inline
+
         sharding-algorithms: # 分片算法
           my_table: # 上面自定义的算法名称
             type: INLINE
             props:
               # 分片算法计算规则
               algorithm-expression: user$->{age % 2}
+          database_inline:
+            type: INLINE
+            props:
+              algorithm-expression: test$->{age % 2}
 
 

@@ -21,7 +21,7 @@ public class UserController {
         for (int i = 0; i < 4; i++) {
             UserDTO userDTO = new UserDTO();
             userDTO.setAge(i);
-            userDTO.setName("Marry" + i);
+            userDTO.setName("O_li_g" + i);
             int save = userService.save(userDTO);
             System.out.println(save);
         }
