@@ -78,7 +78,7 @@
         <swagger-boot>1.9.0.RELEASE</swagger-boot>
         <wxpay.version>0.0.3</wxpay.version>
         <lcn.last.version>4.1.0</lcn.last.version>
-        <httpclient.version>4.5.3</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
     </properties>
 
