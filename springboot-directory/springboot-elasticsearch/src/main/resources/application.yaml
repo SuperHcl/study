@@ -1,0 +1,6 @@
+server:
+  port: 8083
+
+elasticsearch:
+  rest:
+    hosts: 120.46.186.212:9201
