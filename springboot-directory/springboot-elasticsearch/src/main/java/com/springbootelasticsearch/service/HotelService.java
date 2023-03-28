@@ -2,10 +2,15 @@ package com.springbootelasticsearch.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.springbootelasticsearch.entity.HotelEsModel;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -36,6 +41,8 @@ public class HotelService extends AbstractBaseEsService {
         SearchRequest searchRequest = new SearchRequest("hotel");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchQuery("title", titleKeyword));
+        // 设置希望返回的字段数组
+        searchSourceBuilder.fetchSource(new String[] {"title", "city", "price"}, null);
         searchRequest.source(searchSourceBuilder);
 
         try {
@@ -63,12 +70,24 @@ public class HotelService extends AbstractBaseEsService {
         return result;
     }
 
-    public void singleSave(HotelEsModel hotelEsModel)  {
+    /**
+     * 单条doc保存
+     *
+     * @param hotelEsModel doc
+     */
+    public void singleSave(HotelEsModel hotelEsModel) {
         Map<String, Object> stringObjectMap = BeanUtil.beanToMap(hotelEsModel, true, true);
         logger.info(stringObjectMap.toString());
         singleWriteDoc(stringObjectMap, "hotel", "");
     }
 
+    /**
+     * 批量保存
+     *
+     * @param titleKey tk
+     * @param cityKey  ck
+     * @param price    pc
+     */
     public void bulkSave(String titleKey, String cityKey, double price) {
         List<Map<String, Object>> data = new ArrayList<>();
         for (int i = 1; i <= 3; i++) {
@@ -83,6 +102,61 @@ public class HotelService extends AbstractBaseEsService {
 
         logger.info(data.toString());
         bulkWriteDocs(data, "hotel");
+    }
+
+    /**
+     * 通过docId删除文档
+     *
+     * @param index 索引
+     * @param docId docId
+     */
+    public void deleteById(String index, String docId) {
+        DeleteRequest deleteRequest = new DeleteRequest(index, docId);
+        try {
+            restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param index 索引
+     * @param docIdList id集合
+     */
+    public void bulkDelete(String index, List<String> docIdList) {
+        BulkRequest bulkRequest = new BulkRequest();
+        for (String id : docIdList) {
+            DeleteRequest deleteRequest = new DeleteRequest(index, id);
+            bulkRequest.add(deleteRequest);
+        }
+
+        try {
+            BulkResponse bulkResponse = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+            if (bulkResponse.hasFailures()) {
+                System.out.println("bulk fail, message:" + bulkResponse.buildFailureMessage());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 条件查询删除
+     *
+     * @param index index
+     * @param city city
+     */
+    public void deleteByQuery(String index, String city) {
+        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(index);
+        deleteByQueryRequest.setQuery(new TermQueryBuilder("city", city));
+
+        try {
+            restHighLevelClient.deleteByQuery(deleteByQueryRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
