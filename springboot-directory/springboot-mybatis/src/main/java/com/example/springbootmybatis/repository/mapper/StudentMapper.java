@@ -20,4 +20,8 @@ public interface StudentMapper {
     List<StudentDAO> findByStudent(/*@Param("student") */StudentDAO params);
 
     StudentDAO findOneByStudent(StudentDAO studentDAO);
+    List<Map<String, Object>> findAll();
+
+    int insertOne(StudentDAO studentDAO);
+
 }

@@ -79,6 +79,14 @@
             <artifactId>log4j1.2-api</artifactId>
             <version>${tinylog.version}</version>
         </dependency>
+
+        <!--sql解析-->
+        <!--https://jsqlparser.github.io/JSqlParser/usage.html#parse-a-sql-statements-->
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>4.6</version>
+        </dependency>
     </dependencies>
 
     <build>

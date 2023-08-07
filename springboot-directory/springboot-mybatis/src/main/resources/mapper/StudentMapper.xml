@@ -6,12 +6,31 @@
 
 <mapper namespace="com.example.springbootmybatis.repository.mapper.StudentMapper">
 
+    <sql id="s1">
+        s.*
+    </sql>
+    <sql id="s2">
+        s.id,s.name
+    </sql>
+    <insert id="insertOne">
+        insert into student(name, age, address) value (#{name}, #{age}, #{address})
+    </insert>
+
     <select id="findById" resultType="com.example.springbootmybatis.repository.dao.StudentDAO">
         select * from student where id = #{id}
     </select>
 
     <select id="findByParam" resultType="com.example.springbootmybatis.repository.dao.StudentDAO">
-        select * from student s
+        select
+        <choose>
+            <when test="id != null">
+                <include refid="s2" />
+            </when>
+            <otherwise>
+                <include refid="s1"/>
+            </otherwise>
+        </choose>
+        from student s
         <where>
             <if test="id != null">
                 s.id = #{id}
@@ -41,5 +60,12 @@
     <select id="findOneByStudent" resultType="com.example.springbootmybatis.repository.dao.StudentDAO"
             parameterType="com.example.springbootmybatis.repository.dao.StudentDAO">
         select * from student where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="map">
+        select s.*, c.name as cname
+        from student s
+                 left join classroom cr on s.id = cr.student_id
+                 left join class c on cr.class_id = c.id
     </select>
 </mapper>
